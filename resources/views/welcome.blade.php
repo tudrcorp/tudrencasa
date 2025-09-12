@@ -10,12 +10,12 @@
     <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tudrencasa, Tu Dren Casa, Tu Dren Viajes">
     <meta name="author" content="Tudrencasa">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.tudreng.com/">
+    <link rel="canonical" href="https://www.tudrencasa.com/">
 
     <meta property="og:title" content="Cuidamos tu Salud y tu Viaje">
     <meta property="og:description" content="Tudrencasa te ofrece servicios de salud a domicilio y seguros de viaje.">
     <meta property="og:image" content="{{ asset('images/logoWp3.png') }}">
-    <meta property="og:url" content="https://www.tudrengroup.com/">
+    <meta property="og:url" content="https://www.tudrencasa.com/">
     <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary_large_image">
