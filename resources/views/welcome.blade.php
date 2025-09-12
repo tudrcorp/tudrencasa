@@ -582,6 +582,44 @@
 
         }
 
+        /* === ESTILO ESPECIAL PARA "PORTAL DEL AGENTE" === */
+
+        .menu-desktop .menu-agent {
+            color: var(--bg-light) !important;
+            position: relative;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .menu-desktop .menu-agent::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background: linear-gradient(90deg, var(--primary), var(--secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .menu-desktop .menu-agent:hover {
+            color: white !important;
+            background-color: var(--primary);
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        .menu-desktop .menu-agent:hover::before {
+            border-color: var(--secondary);
+            background: linear-gradient(90deg, var(--secondary), var(--light-blue)) border-box;
+        }
+
+
+
 
 
 
@@ -619,7 +657,8 @@
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#contacto">Contáctanos</a></li>
-                <li><a href="#contacto">Portal del Agente</a></li>
+                <li><a href="https://integracorp.tudrgroup.com/agents" target="_blank" class="menu-agent">Portal del Agente</a></li>
+
 
             </ul>
         </nav>
@@ -638,7 +677,9 @@
                 <li><a href="#home" onclick="closeMobileMenu()"><span>Inicio</span></a></li>
                 <li><a href="#nosotros" onclick="closeMobileMenu()"><span>Nosotros</span></a></li>
                 <li><a href="#contacto" onclick="closeMobileMenu()"><span>Contáctanos</span></a></li>
-                <li><a href="#contacto" onclick="closeMobileMenu()"><span>Portal del Agente</span></a></li>
+                <li><a href="https://integracorp.tudrgroup.com/agents" onclick="closeMobileMenu()" class="menu-agent"><span>Portal del Agente</span></a></li>
+
+
 
             </ul>
         </div>
