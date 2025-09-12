@@ -654,12 +654,10 @@
         <!-- Menú Desktop (solo en pantallas grandes) -->
         <nav class="menu-desktop menu-style">
             <ul>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contáctanos</a></li>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="{{ route('inConstruccion') }}">Nosotros</a></li>
+                <li><a href="{{ route('inConstruccion') }}">Contáctanos</a></li>
                 <li><a href="https://integracorp.tudrgroup.com/agents" target="_blank" class="menu-agent">Portal del Agente</a></li>
-
-
             </ul>
         </nav>
 
@@ -675,12 +673,9 @@
             </div>
             <ul>
                 <li><a href="#home" onclick="closeMobileMenu()"><span>Inicio</span></a></li>
-                <li><a href="#nosotros" onclick="closeMobileMenu()"><span>Nosotros</span></a></li>
-                <li><a href="#contacto" onclick="closeMobileMenu()"><span>Contáctanos</span></a></li>
+                <li><a href="{{ route('inConstruccion') }}" onclick="closeMobileMenu()"><span>Nosotros</span></a></li>
+                <li><a href="{{ route('inConstruccion') }}" onclick="closeMobileMenu()"><span>Contáctanos</span></a></li>
                 <li><a href="https://integracorp.tudrgroup.com/agents" onclick="closeMobileMenu()" class="menu-agent"><span>Portal del Agente</span></a></li>
-
-
-
             </ul>
         </div>
 
@@ -731,7 +726,8 @@
                     <li>Imagenología a Domicilio con fines Diagnósticos</li>
                     <li>Seguimiento e Interpretación de Resultados</li>
                 </ul>
-                <a href="#contacto" class="btn-nosotros">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class=" btn-nosotros">Comprar</a>
+
             </div>
             <div class="plan-card animate-fade-in">
                 <h3>Ideal</h3>
@@ -747,7 +743,8 @@
                     <li><span class="highlightText">Consulta ONLINE o Presencial con Médicos Especialistas</span></li>
 
                 </ul>
-                <a href="#contacto" class="btn-nosotros">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class=" btn-nosotros">Comprar</a>
+
             </div>
             <div class="plan-card animate-fade-in">
                 <h3>Especial</h3>
@@ -764,7 +761,8 @@
                     <li><span class="highlightText">Urgencias Menores en Domicilio o en sitio</span></li>
                     <li><span class="highlightText">Asistencia Médica por emergencia. (Patologías Listadas)</span></li>
                 </ul>
-                <a href="#contacto" class="btn-nosotros mt-full">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class=" btn-nosotros mt-full">Comprar</a>
+
             </div>
         </div>
     </section>
