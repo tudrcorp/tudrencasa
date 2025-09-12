@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Asistencia Médica en Casa</title>
 
+    <!--SEO-->
+    <meta name="description" content="Tudrencasa cuida de tu salud y tus viajes con servicios médicos a domicilio y seguros de viaje. Cuidamos de ti, donde sea que estés.">
+    <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tudrencasa, Tu Dren Casa, Tu Dren Viajes">
+    <meta name="author" content="Tudrencasa">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.tudreng.com/">
+
+    <meta property="og:title" content="Cuidamos tu Salud y tu Viaje">
+    <meta property="og:description" content="Tudrencasa te ofrece servicios de salud a domicilio y seguros de viaje.">
+    <meta property="og:image" content="{{ asset('images/logoWp3.png') }}">
+    <meta property="og:url" content="https://www.tudrengroup.com/">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Tudrencasa">
+    <meta name="twitter:creator" content="@Tudrencasa">
+    <meta name="twitter:title" content="Cuidamos tu Salud y tu Viaje">
+    <meta name="twitter:description" content="Tudrencasa te ofrece servicios de salud a domicilio y seguros de viaje.">
+    <meta name="twitter:image" content="{{ asset('images/social-share.jpg') }}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logoWp3.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logoWp3.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logoWp3.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('images/logoWp3.png') }}">
+
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
