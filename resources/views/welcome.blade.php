@@ -6,16 +6,16 @@
     <title>Asistencia Médica en Casa</title>
 
     <!--SEO-->
-    <meta name="description" content="Tudrencasa cuida de tu salud y tus viajes con servicios médicos a domicilio y seguros de viaje. Cuidamos de ti, donde sea que estés.">
-    <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tudrencasa, Tu Dren Casa, Tu Dren Viajes">
+    <meta name="description" content="u Doctor en Casa es un modelo de asistencia de salud Integral, basada en los servicios de telemedicina y atención médica domiciliaria, las 24 horas, los 365 días del año.">
+    <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tu doctor en casa, tudrencasa, TuDrEnCasa, Medico en casa, telemedicina, atención medica domiciliaria, ">
     <meta name="author" content="Tudrencasa">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.tudrencasa.com/">
+    <link rel="canonical" href="https://tudrencasa.com/">
 
     <meta property="og:title" content="Cuidamos tu Salud y tu Viaje">
     <meta property="og:description" content="Tudrencasa te ofrece servicios de salud a domicilio y seguros de viaje.">
     <meta property="og:image" content="{{ asset('images/imagotipo.png') }}">
-    <meta property="og:url" content="https://www.tudrencasa.com/">
+    <meta property="og:url" content="https://tudrencasa.com/">
     <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary_large_image">
