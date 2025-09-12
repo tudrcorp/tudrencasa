@@ -29,3 +29,4 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 The Laravel + Livewire starter kit is open-sourced software licensed under the MIT license.
 # tudrencasa
+# tudrencasa
