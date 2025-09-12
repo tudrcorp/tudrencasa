@@ -1,5 +1,4 @@
 * text=auto eol=lf
-
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
@@ -8,3 +7,4 @@
 CHANGELOG.md export-ignore
 README.md export-ignore
 public/images/videoBanner.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
