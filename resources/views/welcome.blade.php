@@ -40,6 +40,11 @@
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+
     <!-- Estilos Inline en el Head -->
     <style>
         :root {
@@ -680,8 +685,56 @@
             <img src="{{ asset('images/logoNewTDEC.png') }}" alt="Logo Asistencia Médica">
         </div>
 
+         <!-- Menú desplegable - Esquina superior izquierda con iconos y glow -->
+         <div class="absolute top-8 left-6 z-30" x-data="{ open: false }" @click.away="open = false">
+             <!-- Botón con ícono + texto "Menú" -->
+             <button @click="open = !open" class="flex items-center space-x-2 px-4 py-2 rounded-full bg-black bg-opacity-30 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-50 transition-all duration-200 group focus:outline-none text-white text-sm font-medium" aria-label="Menú">
+                 <div class="flex space-x-1">
+                     {{-- <span class="block h-1 w-5 bg-white opacity-70 group-hover:opacity-100 transition"></span> --}}
+                     <span class="block h-1 w-5 bg-white opacity-70 group-hover:opacity-100 transition"></span>
+                     <span class="block h-1 w-5 bg-white opacity-70 group-hover:opacity-100 transition"></span>
+                 </div>
+                 <span>Menú Comercial</span>
+             </button>
+
+             <!-- Dropdown con iconos y efecto glow -->
+             <div x-show="open" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="origin-top-left absolute mt-2 w-52 rounded-xl shadow-lg bg-black bg-opacity-20 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-200 overflow-hidden">
+                 <div class="py-1 text-sm text-gray-200">
+
+                     <!-- Item 1: Panel Principal -->
+                     <a href="https://integracorp.tudrgroup.com/master" class="flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 transition duration-200 group">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 mr-3">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                         </svg>
+                         <span class="group-hover:text-white transition">AGENCIA MASTER</span>
+                         <!-- Efecto glow al hacer hover -->
+                         <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 blur-sm rounded-xl pointer-events-none"></div>
+                     </a>
+
+                     <!-- Item 2: General -->
+                     <a href="https://integracorp.tudrgroup.com/general" class="flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 transition duration-200 group">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 mr-3">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                         </svg>
+                         <span class="group-hover:text-white transition">AGENCIA GENERAL</span>
+                         <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 blur-sm rounded-xl pointer-events-none"></div>
+                     </a>
+
+                     <!-- Item 2: Agentes -->
+                     <a href="https://integracorp.tudrgroup.com/agents" class="flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 transition duration-200 group">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 mr-3">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                         </svg>
+                         <span class="group-hover:text-white transition">AGENTE</span>
+                         <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 blur-sm rounded-xl pointer-events-none"></div>
+                     </a>
+                 </div>
+             </div>
+         </div>
+
+
         <!-- Menú Desktop (solo en pantallas grandes) -->
-        <nav class="menu-desktop menu-style">
+        {{-- <nav class="menu-desktop menu-style">
             <ul>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="{{ route('inConstruccion') }}">Nosotros</a></li>
@@ -690,7 +743,7 @@
                 <li><a href="https://integracorp.tudrgroup.com/master" target="_blank" class="menu-agent">Portal Agencia Master</a></li>
                 <li><a href="https://integracorp.tudrgroup.com/general" target="_blank" class="menu-agent">Portal Agencia General</a></li>
             </ul>
-        </nav>
+        </nav> --}}
 
         <!-- Menú Hamburguesa (solo en móviles) -->
         <div class="menu-mobile" id="menu-toggle">
