@@ -812,7 +812,7 @@
                     <li>Imagenología a Domicilio con fines Diagnósticos</li>
                     <li>Seguimiento e Interpretación de Resultados</li>
                 </ul>
-                <a href="{{ route('inConstruccion') }} class=" btn-nosotros">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class="btn-nosotros">Comprar</a>
 
             </div>
             <div class="plan-card animate-fade-in">
@@ -829,7 +829,7 @@
                     <li><span class="highlightText">Consulta ONLINE o Presencial con Médicos Especialistas</span></li>
                     <li><span class="highlightText">Asistencia Médica por Accidente</span></li>
                 </ul>
-                <a href="{{ route('inConstruccion') }} class=" btn-nosotros">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class="btn-nosotros">Comprar</a>
 
             </div>
             <div class="plan-card animate-fade-in">
@@ -848,7 +848,7 @@
                     <li><span class="highlightText">Urgencias Menores en Domicilio o en sitio</span></li>
                     <li><span class="highlightText">Asistencia Médica por emergencia. (Patologías Listadas)</span></li>
                 </ul>
-                <a href="{{ route('inConstruccion') }} class=" btn-nosotros mt-full">Comprar</a>
+                <a href="{{ route('inConstruccion') }} class="btn-nosotros mt-full">Comprar</a>
 
             </div>
         </div>
