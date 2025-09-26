@@ -827,7 +827,7 @@
                     <li>Seguimiento e Interpretación de Resultados</li>
                     <li><span class="highlightText">Traslado en Ambulancia urbano en caso de Emergencia</span></li>
                     <li><span class="highlightText">Consulta ONLINE o Presencial con Médicos Especialistas</span></li>
-
+                    <li><span class="highlightText">Asistencia Médica por Accidente</span></li>
                 </ul>
                 <a href="{{ route('inConstruccion') }} class=" btn-nosotros">Comprar</a>
 
