@@ -7,7 +7,7 @@
 
     <!--SEO-->
     <meta name="description" content="u Doctor en Casa es un modelo de asistencia de salud Integral, basada en los servicios de telemedicina y atención médica domiciliaria, las 24 horas, los 365 días del año.">
-    <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tu doctor en casa, tudrencasa, TuDrEnCasa, Medico en casa, telemedicina, atención medica domiciliaria, ">
+    <meta name="keywords" content="salud, viajes, seguros de viaje, asistencia médica, médico a domicilio,  Tu doctor en casa, tudrencasa, TuDrEnCasa, Medico en casa, telemedicina, atención Médica domiciliaria, ">
     <meta name="author" content="Tudrencasa">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.tudrencasa.com/">
@@ -804,10 +804,10 @@
             <div class="plan-card animate-fade-in">
                 <h3>Inicial</h3>
                 <ul>
-                    <li>Atención Medica Telefonica</li>
+                    <li>Atención Médica Telefónica</li>
                     <li>Entrega de Tratamiento Médico a Domicilio</li>
                     <li>Monitoreo Telefónico Evolutivo</li>
-                    <li>Atención Medica Domiciliaria con Tratamiento de Unidosis Incluida</li>
+                    <li>Atención Médica Domiciliaria con Tratamiento de Unidosis Incluida</li>
                     <li>Laboratorios a Domicilio con fines Diagnósticos</li>
                     <li>Imagenología a Domicilio con fines Diagnósticos</li>
                     <li>Seguimiento e Interpretación de Resultados</li>
@@ -818,10 +818,10 @@
             <div class="plan-card animate-fade-in">
                 <h3>Ideal</h3>
                 <ul>
-                    <li>Atención Medica Telefonica</li>
+                    <li>Atención Médica Telefónica</li>
                     <li>Entrega de Tratamiento Médico a Domicilio</li>
                     <li>Monitoreo Telefónico Evolutivo</li>
-                    <li>Atención Medica Domiciliaria con Tratamiento de Unidosis Incluida</li>
+                    <li>Atención Médica Domiciliaria con Tratamiento de Unidosis Incluida</li>
                     <li>Laboratorios a Domicilio con fines Diagnósticos</li>
                     <li>Imagenología a Domicilio con fines Diagnósticos</li>
                     <li>Seguimiento e Interpretación de Resultados</li>
@@ -835,10 +835,11 @@
             <div class="plan-card animate-fade-in">
                 <h3>Especial</h3>
                 <ul>
-                    <li>Atención Medica Telefonica</li>
+                    <li>Atención Médica Telefónica</li>
+
                     <li>Entrega de Tratamiento Médico a Domicilio</li>
                     <li>Monitoreo Telefónico Evolutivo</li>
-                    <li>Atención Medica Domiciliaria con Tratamiento de Unidosis Incluida</li>
+                    <li>Atención Médica Domiciliaria con Tratamiento de Unidosis Incluida</li>
                     <li>Laboratorios a Domicilio con fines Diagnósticos</li>
                     <li>Imagenología a Domicilio con fines Diagnósticos</li>
                     <li>Seguimiento e Interpretación de Resultados</li>
