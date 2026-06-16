@@ -120,6 +120,48 @@
             transform: scale(1.2) translateY(-3px);
         }
 
+        /* === BOTÓN WHATSAPP FLOTANTE === */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            background-color: #22c55e;
+            border-radius: 9999px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float:focus {
+            outline: none;
+        }
+
+        .whatsapp-float img {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .whatsapp-float .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
         /* === INDICADOR DE SCROLL === */
         .scroll-indicator {
             position: absolute;
@@ -417,17 +459,16 @@
         <nav class="menu">
             <ul>
                 <li><a href="/">Inicio</a></li>
-                <li><a href="/nosotros">Nosotros</a></li>
-                <li><a href="/nosotros#contacto">Contáctanos</a></li>
+                <li><a href="{{ asset('docs/Presentación Corporativa - Tu Doctor en Casa - 2026.pdf') }}" target="_blank" rel="noopener noreferrer">Nosotros</a></li>
+                <li><a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" rel="noopener noreferrer">Contáctanos</a></li>
             </ul>
         </nav>
 
         <!-- Redes sociales en esquina inferior izquierda -->
         <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/tudrencasa"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/tudrencasa/"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/tudrencasa"><i class="fab fa-twitter"></i></a>
         </div>
 
         <!-- Indicador de scroll -->
@@ -494,10 +535,10 @@
         <div class="footer-content">
             <p>&copy; {{ date('Y') }} Asistencia Médica en Casa. Todos los derechos reservados.</p>
             <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/tudrencasa"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/tudrencasa/"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
@@ -525,6 +566,12 @@
         });
 
     </script>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" class="whatsapp-float">
+        <img src="{{ asset('images/whatsapp.png') }}" alt="WhatsApp">
+        <span class="sr-only">Chatea con nosotros por WhatsApp</span>
+    </a>
 
 </body>
 </html>

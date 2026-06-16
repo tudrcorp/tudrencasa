@@ -757,8 +757,8 @@
             </div>
             <ul>
                 <li><a href="#home" onclick="closeMobileMenu()"><span>Inicio</span></a></li>
-                <li><a href="{{ route('inConstruccion') }}" onclick="closeMobileMenu()"><span>Nosotros</span></a></li>
-                <li><a href="{{ route('inConstruccion') }}" onclick="closeMobileMenu()"><span>Contáctanos</span></a></li>
+                <li><a href="{{ asset('docs/Presentación Corporativa - Tu Doctor en Casa - 2026.pdf') }}" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()"><span>Nosotros</span></a></li>
+                <li><a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()"><span>Contáctanos</span></a></li>
                 <li><a href="https://integracorp.tudrgroup.com/agents" onclick="closeMobileMenu()" class="menu-agent"><span>Portal del Agente</span></a></li>
                 <li><a href="https://integracorp.tudrgroup.com/master" onclick="closeMobileMenu()" class="menu-agent"><span>Portal Agencia Master</span></a></li>
                 <li><a href="https://integracorp.tudrgroup.com/general" onclick="closeMobileMenu()" class="menu-agent"><span>Portal Agencia General</span></a></li>
@@ -767,10 +767,9 @@
 
         <!-- Redes sociales -->
         <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/tudrencasa"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/tudrencasa/"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/tudrencasa"><i class="fab fa-twitter"></i></a>
         </div>
 
         <!-- Indicador de scroll -->
@@ -859,10 +858,10 @@
         <div class="footer-content">
             <p>&copy; {{ date('Y') }} Asistencia Médica en Casa. Todos los derechos reservados.</p>
             <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/tudrencasa"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/tudrencasa/"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
@@ -917,6 +916,12 @@
         });
 
     </script>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/584242271498?text=Hola ,%20me%20gustaría%20cotizar%20un%20seguro" target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-green-500 rounded-full shadow-lg transition-transform hover:scale-110 focus:outline-none">
+        <img src="{{ asset('images/whatsapp.png') }}" alt="WhatsApp" class="w-8 h-8 text-white">
+        <span class="sr-only">Chatea con nosotros por WhatsApp</span>
+    </a>
 
 </body>
 </html>
