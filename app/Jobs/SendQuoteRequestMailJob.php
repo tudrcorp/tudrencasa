@@ -17,6 +17,11 @@ class SendQuoteRequestMailJob implements ShouldQueue
 
     public int $tries = 5;
 
+    private const DEFAULT_CC = [
+        'solrodriguez@tudrencasa.com',
+        'aaular@tudrencasa.com',
+    ];
+
     /**
      * @param  array{
      *     full_name: string,
@@ -47,11 +52,15 @@ class SendQuoteRequestMailJob implements ShouldQueue
             return;
         }
 
-        $cc = config('mail.quote_request_cc', []);
-        $cc = is_array($cc) ? array_values(array_filter($cc, 'is_string')) : [];
+        $cc = $this->resolveCc();
 
         try {
             Mail::to($to)->cc($cc)->send(new QuoteRequestMail($this->payload));
+
+            Log::info('QUOTE-REQUEST: correo enviado.', [
+                'to' => $to,
+                'cc' => $cc,
+            ]);
         } catch (Throwable $exception) {
             Log::error('QUOTE-REQUEST: fallo al enviar correo de cotización.', [
                 'request_hash' => substr(hash('sha256', (string) ($this->payload['full_name'] ?? '')), 0, 12),
@@ -60,5 +69,21 @@ class SendQuoteRequestMailJob implements ShouldQueue
 
             throw $exception;
         }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolveCc(): array
+    {
+        $cc = config('mail.quote_request_cc', []);
+
+        if (! is_array($cc)) {
+            return self::DEFAULT_CC;
+        }
+
+        $cc = array_values(array_filter($cc, static fn ($email): bool => is_string($email) && $email !== ''));
+
+        return $cc !== [] ? $cc : self::DEFAULT_CC;
     }
 }

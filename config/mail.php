@@ -124,14 +124,13 @@ return [
     |
     */
 
-    'quote_request_to' => env('QUOTE_REQUEST_MAIL_TO', 'comercial@tudrencasa.com'),
+    'quote_request_to' => env('QUOTE_REQUEST_MAIL_TO') ?: 'comercial@tudrencasa.com',
 
+    // Si QUOTE_REQUEST_MAIL_CC está vacío en .env, env() no usa el default:
+    // hay que forzar el fallback con ?: para no perder las copias.
     'quote_request_cc' => array_values(array_filter(array_map(
         'trim',
-        explode(',', (string) env(
-            'QUOTE_REQUEST_MAIL_CC',
-            'solrodriguez@tudrencasa.com,aaular@tudrencasa.com'
-        ))
+        explode(',', (string) (env('QUOTE_REQUEST_MAIL_CC') ?: 'solrodriguez@tudrencasa.com,aaular@tudrencasa.com'))
     ))),
 
 ];
