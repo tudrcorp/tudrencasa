@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\QuoteController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::post('/cotizacion', [QuoteController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('quote.store');
 
 Route::get('/about', function () {
     return view('about');
