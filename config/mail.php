@@ -113,24 +113,4 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Quote request notification recipient
-    |--------------------------------------------------------------------------
-    |
-    | Destinatario de las solicitudes enviadas desde el formulario
-    | “Cotiza con nosotros”. Configurar en .env como QUOTE_REQUEST_MAIL_TO.
-    | Copias (CC) en QUOTE_REQUEST_MAIL_CC, separadas por coma.
-    |
-    */
-
-    'quote_request_to' => env('QUOTE_REQUEST_MAIL_TO') ?: 'comercial@tudrencasa.com',
-
-    // Si QUOTE_REQUEST_MAIL_CC está vacío en .env, env() no usa el default:
-    // hay que forzar el fallback con ?: para no perder las copias.
-    'quote_request_cc' => array_values(array_filter(array_map(
-        'trim',
-        explode(',', (string) (env('QUOTE_REQUEST_MAIL_CC') ?: 'solrodriguez@tudrencasa.com,aaular@tudrencasa.com'))
-    ))),
-
 ];

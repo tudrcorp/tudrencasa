@@ -9,7 +9,7 @@ beforeEach(function () {
     Cache::flush();
 });
 
-it('envía la solicitud de cotización y despacha el correo con todos los datos', function () {
+it('envía la solicitud de cotización y el correo con todos los datos', function () {
     Mail::fake();
 
     $payload = [
@@ -27,7 +27,6 @@ it('envía la solicitud de cotización y despacha el correo con todos los datos'
         ->assertSuccessful()
         ->assertJsonStructure(['message']);
 
-    // Con QUEUE_CONNECTION=sync el Job corre al instante → assertSent.
     Mail::assertSent(QuoteRequestMail::class, function (QuoteRequestMail $mail) use ($payload) {
         expect($mail->envelope()->subject)->toBe('Nueva solicitud de cotización — Ana Pérez');
         expect($mail->details())->toMatchArray([
@@ -39,7 +38,7 @@ it('envía la solicitud de cotización y despacha el correo con todos los datos'
             'Observaciones' => 'Necesito cobertura familiar',
         ]);
 
-        return $mail->hasTo(config('mail.quote_request_to'))
+        return $mail->hasTo('comercial@tudrencasa.com')
             && $mail->hasCc('solrodriguez@tudrencasa.com')
             && $mail->hasCc('aaular@tudrencasa.com')
             && $mail->payload === $payload;
@@ -92,7 +91,7 @@ it('acepta solicitud con teléfono y sin correo', function () {
     $this->postJson(route('quote.store'), $payload)->assertSuccessful();
 
     Mail::assertSent(QuoteRequestMail::class, function (QuoteRequestMail $mail) {
-        return $mail->hasTo(config('mail.quote_request_to'))
+        return $mail->hasTo('comercial@tudrencasa.com')
             && $mail->hasCc('solrodriguez@tudrencasa.com')
             && $mail->hasCc('aaular@tudrencasa.com')
             && $mail->payload['full_name'] === 'Luis Gómez';
