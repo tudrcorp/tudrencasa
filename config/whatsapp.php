@@ -23,7 +23,7 @@ return [
     | Imagen de marca (logo en mensajes)
     |--------------------------------------------------------------------------
     |
-    | URL pública del logo. Si no se define, se usa APP_URL + images/whatsapp/tudec-logo.png
+    | URL pública del logo. Si no se define, se usa APP_URL + images/logoWhatsAppCotizacion.png
     |
     */
 

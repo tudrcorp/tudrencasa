@@ -1,10 +1,10 @@
 <?php
 
-use App\Jobs\SendNotificacionWhatsApp;
 use App\Mail\QuoteRequestMail;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Queue;
 
 beforeEach(function () {
     // El throttle usa cache; hay que limpiarlo entre tests del mismo proceso.
@@ -14,7 +14,9 @@ beforeEach(function () {
 
 it('envía la solicitud de cotización y el correo con todos los datos', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake([
+        'https://example.test/messages/chat' => Http::response(['sent' => 'true', 'id' => 'msg-1'], 200),
+    ]);
 
     $payload = [
         'full_name' => 'Ana Pérez',
@@ -48,19 +50,22 @@ it('envía la solicitud de cotización y el correo con todos los datos', functio
             && $mail->payload === $payload;
     });
 
-    Queue::assertPushed(SendNotificacionWhatsApp::class, 3);
+    Http::assertSentCount(3);
 
-    Queue::assertPushed(SendNotificacionWhatsApp::class, function (SendNotificacionWhatsApp $job) {
-        return in_array($job->phone, ['+584242220056', '+584242271498', '+584142073145'], true)
-            && str_contains($job->body, 'Ana Pérez')
-            && str_contains($job->body, '04121234567')
-            && str_contains($job->body, 'ana@example.com');
+    Http::assertSent(function (\Illuminate\Http\Client\Request $request) {
+        $data = $request->data();
+
+        return $request->url() === 'https://example.test/messages/chat'
+            && in_array($data['to'] ?? null, ['+584242220056', '+584242271498', '+584142073145'], true)
+            && str_contains((string) ($data['body'] ?? ''), 'Ana Pérez')
+            && str_contains((string) ($data['body'] ?? ''), '04121234567')
+            && str_contains((string) ($data['body'] ?? ''), 'ana@example.com');
     });
 });
 
 it('rechaza una solicitud incompleta y no envía correo', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => '',
@@ -74,12 +79,12 @@ it('rechaza una solicitud incompleta y no envía correo', function () {
         ->assertJsonValidationErrors(['full_name', 'email', 'state', 'city']);
 
     Mail::assertNothingSent();
-    Queue::assertNothingPushed();
+    Http::assertNothingSent();
 });
 
 it('exige al menos un teléfono o un correo', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => 'Luis Gómez',
@@ -92,12 +97,14 @@ it('exige al menos un teléfono o un correo', function () {
         ->assertJsonValidationErrors(['phone', 'email']);
 
     Mail::assertNothingSent();
-    Queue::assertNothingPushed();
+    Http::assertNothingSent();
 });
 
 it('acepta solicitud con teléfono y sin correo', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake([
+        'https://example.test/messages/chat' => Http::response(['sent' => 'true', 'id' => 'msg-2'], 200),
+    ]);
 
     $payload = [
         'full_name' => 'Luis Gómez',
@@ -115,12 +122,12 @@ it('acepta solicitud con teléfono y sin correo', function () {
             && $mail->payload['full_name'] === 'Luis Gómez';
     });
 
-    Queue::assertPushed(SendNotificacionWhatsApp::class, 3);
+    Http::assertSentCount(3);
 });
 
 it('no envía correo ni WhatsApp si el honeypot está rellenado', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => 'Bot Spam',
@@ -135,12 +142,70 @@ it('no envía correo ni WhatsApp si el honeypot está rellenado', function () {
         ->assertJsonStructure(['message']);
 
     Mail::assertNothingSent();
-    Queue::assertNothingPushed();
+    Http::assertNothingSent();
+});
+
+it('si el correo falla, igual envía WhatsApp y responde éxito', function () {
+    $pending = Mockery::mock();
+    $pending->shouldReceive('cc')->andReturnSelf();
+    $pending->shouldReceive('send')->andThrow(new Exception('SMTP connection failed'));
+
+    Mail::shouldReceive('to')->once()->andReturn($pending);
+    Log::spy();
+    Http::fake([
+        'https://example.test/messages/chat' => Http::response(['sent' => 'true', 'id' => 'msg-mail-fail'], 200),
+    ]);
+
+    $payload = [
+        'full_name' => 'Ana Pérez',
+        'phone' => '04121234567',
+        'state' => 'Miranda',
+        'city' => 'Caracas',
+    ];
+
+    $this->postJson(route('quote.store'), $payload)
+        ->assertSuccessful()
+        ->assertJsonStructure(['message']);
+
+    Log::shouldHaveReceived('error')
+        ->withArgs(fn (string $message) => str_contains($message, 'fallo al enviar correo'))
+        ->atLeast()
+        ->once();
+
+    Http::assertSentCount(3);
+});
+
+it('si UltraMsg falla, igual responde éxito tras enviar el correo', function () {
+    Mail::fake();
+    Log::spy();
+    Http::fake([
+        'https://example.test/messages/chat' => Http::response(['error' => 'rate limit'], 200),
+    ]);
+
+    $payload = [
+        'full_name' => 'Ana Pérez',
+        'phone' => '04121234567',
+        'state' => 'Miranda',
+        'city' => 'Caracas',
+    ];
+
+    $this->postJson(route('quote.store'), $payload)
+        ->assertSuccessful()
+        ->assertJsonStructure(['message']);
+
+    Mail::assertSent(QuoteRequestMail::class);
+
+    Log::shouldHaveReceived('error')
+        ->withArgs(fn (string $message) => str_contains($message, 'fallo al enviar WhatsApp'))
+        ->atLeast()
+        ->once();
 });
 
 it('limita el ritmo de envíos del formulario de cotización', function () {
     Mail::fake();
-    Queue::fake();
+    Http::fake([
+        'https://example.test/messages/chat' => Http::response(['sent' => 'true', 'id' => 'msg-3'], 200),
+    ]);
 
     $payload = [
         'full_name' => 'Ana Pérez',

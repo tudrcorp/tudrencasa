@@ -45,12 +45,11 @@ class QuoteController extends Controller
                 'cc' => self::EMAIL_CC,
             ]);
         } catch (Throwable $exception) {
+            // No bloquear WhatsApp ni la respuesta al usuario si SMTP falla (red/firewall).
             Log::error('QUOTE-REQUEST: fallo al enviar correo de cotización.', [
                 'request_hash' => substr(hash('sha256', (string) ($data['full_name'] ?? '')), 0, 12),
                 'error' => $exception->getMessage(),
             ]);
-
-            throw $exception;
         }
 
         QuoteWhatsAppNotifier::notify($data);

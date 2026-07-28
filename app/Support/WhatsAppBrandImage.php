@@ -6,7 +6,7 @@ namespace App\Support;
 
 final class WhatsAppBrandImage
 {
-    public const RELATIVE_PATH = 'images/logoNewTDEC.png';
+    public const RELATIVE_PATH = 'images/logoWhatsAppCotizacion.png';
 
     public static function publicUrl(): string
     {

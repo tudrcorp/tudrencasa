@@ -31,6 +31,8 @@
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="WHATSAPP_TOKEN" value="test-token" force="true"/>
         <env name="WHATSAPP_CHAT_URL" value="https://example.test/messages/chat" force="true"/>
+        <env name="WHATSAPP_IMAGE_API_URL" value="" force="true"/>
+        <env name="WHATSAPP_BRAND_IMAGE_URL" value="" force="true"/>
         <env name="QUOTE_WHATSAPP_TO" value="+584242220056,+584242271498,+584142073145" force="true"/>
     </php>
 </phpunit>
