@@ -1,16 +1,20 @@
 <?php
 
+use App\Jobs\SendNotificacionWhatsApp;
 use App\Mail\QuoteRequestMail;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 
 beforeEach(function () {
     // El throttle usa cache; hay que limpiarlo entre tests del mismo proceso.
     Cache::flush();
+    $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
 });
 
 it('envía la solicitud de cotización y el correo con todos los datos', function () {
     Mail::fake();
+    Queue::fake();
 
     $payload = [
         'full_name' => 'Ana Pérez',
@@ -43,10 +47,20 @@ it('envía la solicitud de cotización y el correo con todos los datos', functio
             && $mail->hasCc('aaular@tudrencasa.com')
             && $mail->payload === $payload;
     });
+
+    Queue::assertPushed(SendNotificacionWhatsApp::class, 3);
+
+    Queue::assertPushed(SendNotificacionWhatsApp::class, function (SendNotificacionWhatsApp $job) {
+        return in_array($job->phone, ['+584242220056', '+584242271498', '+584142073145'], true)
+            && str_contains($job->body, 'Ana Pérez')
+            && str_contains($job->body, '04121234567')
+            && str_contains($job->body, 'ana@example.com');
+    });
 });
 
 it('rechaza una solicitud incompleta y no envía correo', function () {
     Mail::fake();
+    Queue::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => '',
@@ -60,10 +74,12 @@ it('rechaza una solicitud incompleta y no envía correo', function () {
         ->assertJsonValidationErrors(['full_name', 'email', 'state', 'city']);
 
     Mail::assertNothingSent();
+    Queue::assertNothingPushed();
 });
 
 it('exige al menos un teléfono o un correo', function () {
     Mail::fake();
+    Queue::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => 'Luis Gómez',
@@ -76,10 +92,12 @@ it('exige al menos un teléfono o un correo', function () {
         ->assertJsonValidationErrors(['phone', 'email']);
 
     Mail::assertNothingSent();
+    Queue::assertNothingPushed();
 });
 
 it('acepta solicitud con teléfono y sin correo', function () {
     Mail::fake();
+    Queue::fake();
 
     $payload = [
         'full_name' => 'Luis Gómez',
@@ -96,10 +114,13 @@ it('acepta solicitud con teléfono y sin correo', function () {
             && $mail->hasCc('aaular@tudrencasa.com')
             && $mail->payload['full_name'] === 'Luis Gómez';
     });
+
+    Queue::assertPushed(SendNotificacionWhatsApp::class, 3);
 });
 
-it('no envía correo si el honeypot está rellenado', function () {
+it('no envía correo ni WhatsApp si el honeypot está rellenado', function () {
     Mail::fake();
+    Queue::fake();
 
     $response = $this->postJson(route('quote.store'), [
         'full_name' => 'Bot Spam',
@@ -114,10 +135,12 @@ it('no envía correo si el honeypot está rellenado', function () {
         ->assertJsonStructure(['message']);
 
     Mail::assertNothingSent();
+    Queue::assertNothingPushed();
 });
 
 it('limita el ritmo de envíos del formulario de cotización', function () {
     Mail::fake();
+    Queue::fake();
 
     $payload = [
         'full_name' => 'Ana Pérez',

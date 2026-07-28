@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuoteFormRequest;
 use App\Mail\QuoteRequestMail;
+use App\Support\QuoteWhatsAppNotifier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -51,6 +52,8 @@ class QuoteController extends Controller
 
             throw $exception;
         }
+
+        QuoteWhatsAppNotifier::notify($data);
 
         return response()->json($success);
     }
