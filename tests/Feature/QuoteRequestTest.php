@@ -44,9 +44,9 @@ it('envía la solicitud de cotización y el correo con todos los datos', functio
             'Observaciones' => 'Necesito cobertura familiar',
         ]);
 
-        return $mail->hasTo('comercial@tudrencasa.com')
+        return $mail->hasTo('cotizaciones@tudrencasa.com')
             && $mail->hasCc('solrodriguez@tudrencasa.com')
-            && $mail->hasCc('aaular@tudrencasa.com')
+            && $mail->hasCc('comercial@tudrencasa.com')
             && $mail->payload === $payload;
     });
 
@@ -116,9 +116,9 @@ it('acepta solicitud con teléfono y sin correo', function () {
     $this->postJson(route('quote.store'), $payload)->assertSuccessful();
 
     Mail::assertSent(QuoteRequestMail::class, function (QuoteRequestMail $mail) {
-        return $mail->hasTo('comercial@tudrencasa.com')
+        return $mail->hasTo('cotizaciones@tudrencasa.com')
             && $mail->hasCc('solrodriguez@tudrencasa.com')
-            && $mail->hasCc('aaular@tudrencasa.com')
+            && $mail->hasCc('comercial@tudrencasa.com')
             && $mail->payload['full_name'] === 'Luis Gómez';
     });
 

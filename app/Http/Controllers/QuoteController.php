@@ -14,11 +14,11 @@ use Throwable;
 
 class QuoteController extends Controller
 {
-    private const EMAIL_TO = 'comercial@tudrencasa.com';
+    private const EMAIL_TO = 'cotizaciones@tudrencasa.com';
 
     private const EMAIL_CC = [
         'solrodriguez@tudrencasa.com',
-        'aaular@tudrencasa.com',
+        'comercial@tudrencasa.com',
     ];
 
     public function store(QuoteFormRequest $request): JsonResponse
